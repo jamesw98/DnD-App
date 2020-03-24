@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homescreen">
+
+    <fragment
+        android:id="@+id/dice_roller"
+        android:name="com.example.dndapp.dice_roller"
+        android:label="fragment_dice_roller"
+        tools:layout="@layout/fragment_dice_roller" />
+    <fragment
+        android:id="@+id/stats"
+        android:name="com.example.dndapp.stats"
+        android:label="fragment_stats"
+        tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/homescreen"
+        android:name="com.example.dndapp.homescreen"
+        android:label="fragment_homescreen"
+        tools:layout="@layout/fragment_homescreen" >
+        <action
+            android:id="@+id/action_homescreen_to_stats"
+            app:destination="@id/stats" />
+        <action
+            android:id="@+id/action_homescreen_to_dice_roller"
+            app:destination="@id/dice_roller" />
+    </fragment>
+</navigation>
