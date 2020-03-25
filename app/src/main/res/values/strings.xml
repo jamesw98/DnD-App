@@ -5,4 +5,8 @@
     <string name="title">DnD Reference App</string>
     <string name="dice">Dice Roller</string>
     <string name="stats">Character Stats</string>
+    <string name="diceTitle">Dice Roller</string>
+    <string name="dieType">Die Type</string>
+    <string name="numDice">Number of Dice</string>
+    <string name="roll">1 d 4</string>
 </resources>

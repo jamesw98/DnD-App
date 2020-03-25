@@ -1,59 +1,130 @@
 package com.example.dndapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
+import kotlin.random.Random
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [dice_roller.newInstance] factory method to
- * create an instance of this fragment.
- */
 class dice_roller : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dice_roller, container, false)
+        val view = inflater.inflate(R.layout.fragment_dice_roller, container, false)
+
+        // the valid types of dice
+        val typesOfDice = arrayOf("4", "6", "8", "10", "12", "20", "100")
+        var diceIndex = 0
+
+        var rollType = arrayOf("1", "4")
+
+        // 1d4, 2d6, etc.
+        val rollTypeTextView: TextView? = view?.findViewById(R.id.roll)
+
+        // result of the roll
+        val rollResultTextView: TextView? = view?.findViewById(R.id.rollResult)
+
+        // the roll button
+        val rollButton: Button? = view?.findViewById(R.id.rollButtton)
+
+        // seek bar for number of dice
+        val numDiceBar: SeekBar? = view?.findViewById(R.id.seekBar)
+        numDiceBar?.max = 10
+
+        // plus and minus buttons
+        val plusButton: Button? = view?.findViewById(R.id.plus)
+        val minusButton: Button? = view?.findViewById(R.id.minus)
+
+        if (diceIndex == 0){
+            minusButton?.isEnabled = false
+        }
+        if (diceIndex == 6){
+            plusButton?.isEnabled = false
+        }
+
+        plusButton?.setOnClickListener(){
+            if (diceIndex != 0){
+                minusButton?.isEnabled = true
+            }
+            if (diceIndex != 6){
+                plusButton?.isEnabled = true
+            }
+
+            diceIndex++
+            rollType[1] = typesOfDice[diceIndex]
+            rollTypeTextView?.text = makeString(rollType)
+
+            if (diceIndex == 0){
+                minusButton?.isEnabled = false
+            }
+            if (diceIndex == 6){
+                plusButton?.isEnabled = false
+            }
+        }
+
+        minusButton?.setOnClickListener(){
+            if (diceIndex != 0){
+                minusButton?.isEnabled = true
+            }
+            if (diceIndex != 6){
+                plusButton?.isEnabled = true
+            }
+
+            diceIndex--
+            rollType[1] = typesOfDice[diceIndex]
+            rollTypeTextView?.text = makeString(rollType)
+
+            if (diceIndex == 0){
+                minusButton?.isEnabled = false
+            }
+            if (diceIndex == 6){
+                plusButton?.isEnabled = false
+            }
+        }
+
+        rollButton?.setOnClickListener(){
+            var roll = rollDice(rollType[0].toInt(), rollType[1].toInt());
+            rollResultTextView?.text = roll.toString()
+        }
+
+        numDiceBar?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                rollType[0] = progress.toString()
+                rollTypeTextView?.text = makeString(rollType)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // intentionally blank
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // intentionally blank
+            }
+        })
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment dice_roller.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            dice_roller().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun makeString(roll: Array<String>): String {
+        return roll[0] + " d " + roll[1]
+    }
+
+    private fun rollDice(numDice: Int, dieType: Int): Int {
+        var result = 0
+
+        for (i in 1..numDice){
+            result += Random.nextInt(1, dieType + 1)
+        }
+
+        return result;
     }
 }
