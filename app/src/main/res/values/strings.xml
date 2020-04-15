@@ -9,4 +9,11 @@
     <string name="dieType">Die Type</string>
     <string name="numDice">Number of Dice</string>
     <string name="roll">1 d 4</string>
+
+    <string name="strength">Str</string>
+    <string name="dex">Dex</string>
+    <string name="con">Con</string>
+    <string name="intl">Int</string>
+    <string name="wis">Wis</string>
+    <string name="cha">Cha</string>
 </resources>
