@@ -247,7 +247,7 @@
         app:layout_constraintTop_toBottomOf="@+id/wisModText" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/acTEXT"
         android:layout_width="51dp"
         android:layout_height="56dp"
         android:layout_marginStart="40dp"
@@ -328,10 +328,20 @@
         android:id="@+id/booton"
         android:layout_width="188dp"
         android:layout_height="82dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="24dp"
         android:text="@string/rollstats"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/maxHPText" />
+
+    <Button
+        android:id="@+id/gotoSkills"
+        android:layout_width="188dp"
+        android:layout_height="47dp"
+        android:text="@string/gotoskills"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/booton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

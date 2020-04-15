@@ -23,4 +23,5 @@
     <string name="maxHP">Max HP</string>
     <string name="hp">HP</string>
     <string name="rollstats">Roll Stats</string>
+    <string name="gotoskills">Check Skills</string>
 </resources>

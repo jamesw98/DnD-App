@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 
 class stats : Fragment(){
     override fun onCreateView(
@@ -18,6 +19,9 @@ class stats : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_stats, container, false)
+
+        val model = activity?.let { ViewModelProvider(this).get(PlayerModel::class.java) }
+        // TODO on every edittext update, call model.updateStats() or similar fun for level, name, hp, maxhp
 
         val strText: EditText? = view?.findViewById(R.id.strScore)
         val dexText: EditText? = view?.findViewById(R.id.dexScore)
@@ -28,7 +32,7 @@ class stats : Fragment(){
 
         val nameText: EditText? = view?.findViewById(R.id.charName)
         val levelText: EditText? = view?.findViewById(R.id.levelText)
-        val acText: EditText? = view?.findViewById(R.id.acText)
+        val acText: EditText? = view?.findViewById(R.id.acTEXT)
         val maxHPText: EditText? = view?.findViewById(R.id.maxHPText)
         val hpText: EditText? = view?.findViewById(R.id.currHPText)
 
