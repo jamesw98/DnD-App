@@ -9,6 +9,30 @@
     tools:context=".stats">
 
     <EditText
+        android:id="@+id/maxHPText"
+        android:layout_width="51dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="132dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/levelText"
+        app:layout_constraintTop_toBottomOf="@+id/acText" />
+
+    <EditText
+        android:id="@+id/currHPText"
+        android:layout_width="51dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="132dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.72"
+        app:layout_constraintStart_toEndOf="@+id/levelText"
+        app:layout_constraintTop_toBottomOf="@+id/acText" />
+
+    <EditText
         android:id="@+id/wisScore"
         android:layout_width="57dp"
         android:layout_height="54dp"
@@ -210,4 +234,104 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/strScore" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="@string/charName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wisModText" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="51dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="40dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/levelText"
+        app:layout_constraintTop_toBottomOf="@+id/acText" />
+
+    <EditText
+        android:id="@+id/levelText"
+        android:layout_width="51dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="48dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="@string/level"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.143"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/charName" />
+
+    <TextView
+        android:id="@+id/acText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="@string/ac"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/charName" />
+
+    <TextView
+        android:id="@+id/maxHP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="17dp"
+        android:text="@string/maxHP"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@+id/acText"
+        app:layout_constraintTop_toBottomOf="@+id/charName" />
+
+    <TextView
+        android:id="@+id/currHP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="17dp"
+        android:text="@string/hp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintStart_toEndOf="@+id/acText"
+        app:layout_constraintTop_toBottomOf="@+id/charName" />
+
+    <EditText
+        android:id="@+id/charName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/booton"
+        android:layout_width="188dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/rollstats"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/maxHPText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

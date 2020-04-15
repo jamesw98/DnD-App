@@ -26,12 +26,74 @@ class stats : Fragment(){
         val wisText: EditText? = view?.findViewById(R.id.wisScore)
         val chaText: EditText? = view?.findViewById(R.id.chaScore)
 
+        val nameText: EditText? = view?.findViewById(R.id.charName)
+        val levelText: EditText? = view?.findViewById(R.id.levelText)
+        val acText: EditText? = view?.findViewById(R.id.acText)
+        val maxHPText: EditText? = view?.findViewById(R.id.maxHPText)
+        val hpText: EditText? = view?.findViewById(R.id.currHPText)
+
         val strMod: TextView? = view?.findViewById(R.id.strModText)
         val dexMod: TextView? = view?.findViewById(R.id.dexModText3)
         val conMod: TextView? = view?.findViewById(R.id.conModText2)
         val intMod: TextView? = view?.findViewById(R.id.intModText2)
         val wisMod: TextView? = view?.findViewById(R.id.wisModText)
         val chaMod: TextView? = view?.findViewById(R.id.chaModText2)
+
+        nameText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (!s.isBlank() || !s.isEmpty()) {
+                    // TODO update viewmodel
+                }
+            }
+        })
+
+        levelText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (!s.isBlank() || !s.isEmpty()) {
+                    // TODO update viewmodel
+                }
+            }
+        })
+
+        maxHPText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (!s.isBlank() || !s.isEmpty()) {
+                    // TODO update viewmodel
+                }
+            }
+        })
+
+        hpText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (!s.isBlank() || !s.isEmpty()) {
+                    // TODO update viewmodel
+                }
+            }
+        })
 
         strText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}

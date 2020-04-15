@@ -16,4 +16,11 @@
     <string name="intl">Int</string>
     <string name="wis">Wis</string>
     <string name="cha">Cha</string>
+
+    <string name="charName">Character Name</string>
+    <string name="level">Level</string>
+    <string name="ac">AC</string>
+    <string name="maxHP">Max HP</string>
+    <string name="hp">HP</string>
+    <string name="rollstats">Roll Stats</string>
 </resources>
