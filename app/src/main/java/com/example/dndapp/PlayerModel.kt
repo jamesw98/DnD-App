@@ -30,5 +30,11 @@ class PlayerModel : ViewModel(){
             "cha" -> localCharacter.setCha(value)
         }
         //TODO update skills
+
+        // updates the livedata character
+        liveDataCharacter.postValue(localCharacter)
+    }
+
+    fun updateName(name: String){
     }
 }

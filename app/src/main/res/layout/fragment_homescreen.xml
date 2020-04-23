@@ -40,4 +40,24 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dice" />
+
+    <Button
+        android:id="@+id/spell"
+        android:layout_width="700px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/spell"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stats" />
+
+    <Button
+        android:id="@+id/item"
+        android:layout_width="700px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spell" />
 </androidx.constraintlayout.widget.ConstraintLayout>

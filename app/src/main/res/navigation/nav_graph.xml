@@ -14,7 +14,11 @@
         android:id="@+id/stats"
         android:name="com.example.dndapp.stats"
         android:label="fragment_stats"
-        tools:layout="@layout/fragment_stats" />
+        tools:layout="@layout/fragment_stats" >
+        <action
+            android:id="@+id/action_stats_to_skills"
+            app:destination="@id/skills" />
+    </fragment>
     <fragment
         android:id="@+id/homescreen"
         android:name="com.example.dndapp.homescreen"
@@ -26,5 +30,26 @@
         <action
             android:id="@+id/action_homescreen_to_dice_roller"
             app:destination="@id/dice_roller" />
+        <action
+            android:id="@+id/action_homescreen_to_spell_search"
+            app:destination="@id/spell_search" />
+        <action
+            android:id="@+id/action_homescreen_to_item_search"
+            app:destination="@id/item_search" />
     </fragment>
+    <fragment
+        android:id="@+id/skills"
+        android:name="com.example.dndapp.skills"
+        android:label="fragment_skills"
+        tools:layout="@layout/fragment_skills" />
+    <fragment
+        android:id="@+id/spell_search"
+        android:name="com.example.dndapp.spell_search"
+        android:label="fragment_spell_search"
+        tools:layout="@layout/fragment_spell_search" />
+    <fragment
+        android:id="@+id/item_search"
+        android:name="com.example.dndapp.item_search"
+        android:label="fragment_item_search"
+        tools:layout="@layout/fragment_item_search" />
 </navigation>
