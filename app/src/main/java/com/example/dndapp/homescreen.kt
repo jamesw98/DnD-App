@@ -26,29 +26,25 @@ class homescreen : Fragment() {
 
         val diceButton: Button? = view?.findViewById(R.id.dice)
         val statsButton: Button? = view?.findViewById(R.id.stats)
-        val spellButton: Button? = view?.findViewById(R.id.spellSearch)
+        val spellButton: Button? = view?.findViewById(R.id.spell)
         val itemButton: Button? = view?.findViewById(R.id.item)
 
 
         // go to dice roller
         diceButton?.setOnClickListener() {
-            Log.d(">test", "dice button pressed")
             view?.findNavController()?.navigate(R.id.action_homescreen_to_dice_roller)
         }
 
         // go to character stats
         statsButton?.setOnClickListener() {
-            Log.d(">test", "character button pressed")
             view?.findNavController()?.navigate(R.id.action_homescreen_to_stats)
         }
 
         itemButton?.setOnClickListener() {
-            Log.d(">test", "item button pressed")
             view?.findNavController()?.navigate(R.id.action_homescreen_to_item_search)
         }
 
         spellButton?.setOnClickListener() {
-            Log.d(">test", "spell button pressed")
             view?.findNavController()?.navigate(R.id.action_homescreen_to_spell_search)
         }
         return view
