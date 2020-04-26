@@ -7,17 +7,10 @@ import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.EditText
-import android.widget.SearchView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.dndapp.R
-import com.squareup.moshi.Moshi
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import okhttp3.*
 import org.json.JSONObject
-import retrofit2.Retrofit
 import java.io.IOException
 
 class item_search() : Fragment() {

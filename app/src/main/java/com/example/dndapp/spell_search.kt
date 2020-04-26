@@ -1,59 +1,86 @@
 package com.example.dndapp
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import android.view.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import okhttp3.*
+import org.json.JSONObject
+import java.io.IOException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class spell_search() : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [spell_search.newInstance] factory method to
- * create an instance of this fragment.
- */
-class spell_search : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val client = OkHttpClient()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_spell_search, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_spell_search, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment spell_search.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            spell_search().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        val name: TextView? = view?.findViewById(R.id.nameText)
+        val desc: TextView? = view?.findViewById(R.id.descriptionText)
+        val level: TextView? = view?.findViewById(R.id.levelText)
+
+        val query: EditText? = view?.findViewById(R.id.search)
+
+        val searchButton: Button? = view?.findViewById(R.id.searchButton)
+
+        var stringToSearch: String? = null
+
+        var json: JSONObject? = null
+
+        searchButton?.setOnClickListener{
+            val request = Request.Builder()
+                .url("https://api.open5e.com/spells/" + stringToSearch)
+                .build()
+
+            client.newCall(request).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                }
+                override fun onResponse(call: Call, response: Response) {
+                    json = JSONObject(response.body()?.string())
+                }
+            })
+            try {
+                name?.setText(json?.get("name")?.toString())
+
+                if (json?.get("desc")?.toString()?.length!! > 200){
+                    desc?.setText(json?.get("desc")?.toString()?.substring(0, 200) + "...")
+                }
+                else{
+                    desc?.setText(json?.get("desc")?.toString())
+                }
+                level?.setText(json?.get("level")?.toString())
+            }
+            catch (e: Exception) {
+                name?.setText("Spell Not Found")
+                desc?.setText("")
+                level?.setText("")
+            }
+        }
+
+        query?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (!s.isBlank() || !s.isEmpty()) {
+                    stringToSearch = s.toString()
+                    stringToSearch = stringToSearch!!.replace(" ", "-")
+                    stringToSearch = stringToSearch?.toLowerCase()
                 }
             }
+        })
+
+        return view
     }
 }
