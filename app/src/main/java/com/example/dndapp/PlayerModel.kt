@@ -37,4 +37,8 @@ class PlayerModel : ViewModel(){
 
     fun updateName(name: String){
     }
+
+    fun getCharacter(): MutableLiveData<Character>{
+        return liveDataCharacter
+    }
 }

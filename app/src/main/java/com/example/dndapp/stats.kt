@@ -6,12 +6,14 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 
 class stats : Fragment(){
     override fun onCreateView(
@@ -42,6 +44,10 @@ class stats : Fragment(){
         val intMod: TextView? = view?.findViewById(R.id.intModText2)
         val wisMod: TextView? = view?.findViewById(R.id.wisModText)
         val chaMod: TextView? = view?.findViewById(R.id.chaModText2)
+
+        (view.findViewById(R.id.gotoSkills) as Button).setOnClickListener {
+            it.findNavController().navigate(R.id.action_stats_to_skills)
+        }
 
         nameText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}

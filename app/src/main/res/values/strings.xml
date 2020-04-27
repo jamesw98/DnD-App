@@ -31,4 +31,23 @@
     <string name="hp">HP</string>
     <string name="rollstats">Roll Stats</string>
     <string name="gotoskills">Check Skills</string>
+
+    <string name="acrobatics">Acrobatics:</string>
+    <string name="animal">Animal Handling:</string>
+    <string name="arcana">Arcana:</string>
+    <string name="athletics">Athletics:</string>
+    <string name="deception">Deception:</string>
+    <string name="history">History:</string>
+    <string name="insight">Insight:</string>
+    <string name="intimidation">Dex</string>
+    <string name="investigation">Con</string>
+    <string name="medicine">Int</string>
+    <string name="nature">Wis</string>
+    <string name="perception">Cha</string>
+    <string name="performance">Str</string>
+    <string name="persuasion">Dex</string>
+    <string name="religion">Con</string>
+    <string name="sleight">Int</string>
+    <string name="stealth">Wis</string>
+    <string name="survival">Wis</string>
 </resources>
