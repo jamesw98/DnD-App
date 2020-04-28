@@ -1,13 +1,16 @@
 package com.example.dndapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import java.util.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,10 +30,8 @@ class skills : Fragment() {
     ): View? {
 
         val v = inflater.inflate(R.layout.fragment_skills, container, false)
-        val model = activity?.let { ViewModelProviders.of(it).get(PlayerModel::class.java) }
+        val model = activity?.run{ ViewModelProviders.of(this).get(PlayerModel::class.java)}?: throw Exception("Invalid Activity")
 
-
-        //Not sure if all these initializations are needed but kids are starving in Africa so these stay for now
         //Strength Skill
         val athletics: TextView? = view?.findViewById(R.id.athletics)
 
@@ -61,8 +62,7 @@ class skills : Fragment() {
         val performance: TextView? = view?.findViewById(R.id.performance)
         val persuasion: TextView? = view?.findViewById(R.id.persuasion)
 
-
-        model?.getCharacter()?.observe(viewLifecycleOwner, androidx.lifecycle.Observer { character ->
+        model?.liveDataCharacter?.observe(viewLifecycleOwner, androidx.lifecycle.Observer { character ->
             v?.findViewById<TextView>(R.id.athletics)?.text = ("Athletics:" + character.athle.toString())
             v?.findViewById<TextView>(R.id.acrobatics)?.text = ("Acrobatics:" + character.acro.toString())
             v?.findViewById<TextView>(R.id.sleightOfHand)?.text = ("Sleight of Hand:" + character.sleight.toString())
@@ -83,9 +83,7 @@ class skills : Fragment() {
             v?.findViewById<TextView>(R.id.persuasion)?.text = ("Persuasion:" + character.presau.toString())
         })
         return v
-
     }
-
 }
 
 

@@ -3,6 +3,7 @@ package com.example.dndapp
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 
 class stats : Fragment(){
@@ -22,7 +24,7 @@ class stats : Fragment(){
     ): View? {
         val view = inflater.inflate(R.layout.fragment_stats, container, false)
 
-        val model = activity?.let { ViewModelProvider(this).get(PlayerModel::class.java) }
+        val model = activity?.run{ ViewModelProviders.of(this).get(PlayerModel::class.java)}?: throw Exception("Invalid Activity")
         // TODO on every edittext update, call model.updateStats() or similar fun for level, name, hp, maxhp
 
         val strText: EditText? = view?.findViewById(R.id.strScore)
@@ -44,6 +46,15 @@ class stats : Fragment(){
         val intMod: TextView? = view?.findViewById(R.id.intModText2)
         val wisMod: TextView? = view?.findViewById(R.id.wisModText)
         val chaMod: TextView? = view?.findViewById(R.id.chaModText2)
+
+        val rollButton: Button? = view?.findViewById(R.id.booton)
+
+        rollButton?.setOnClickListener{
+            model?.getCharacter()?.observe(viewLifecycleOwner, androidx.lifecycle.Observer { character ->
+                Log.d("LiveStrength", character.strength.toString())
+            })
+        }
+
 
         (view.findViewById(R.id.gotoSkills) as Button).setOnClickListener {
             it.findNavController().navigate(R.id.action_stats_to_skills)
@@ -114,7 +125,10 @@ class stats : Fragment(){
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!s.isBlank() || !s.isEmpty()) {
+                    model?.updateStat("str", Integer.valueOf(s.toString()))
+
                     var newMod: Int = ((Integer.valueOf(s.toString())) / 2) - 5
+
                     if (newMod > 0){
                         strMod?.setText("+" + newMod.toString())
                     }
@@ -133,7 +147,9 @@ class stats : Fragment(){
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
                 if (!s.isBlank() || !s.isEmpty()) {
+                    model?.updateStat("dex", Integer.valueOf(s.toString()))
                     var newMod: Int = ((Integer.valueOf(s.toString())) / 2) - 5
                     if (newMod > 0){
                         dexMod?.setText("+" + newMod.toString())
@@ -153,7 +169,9 @@ class stats : Fragment(){
             }
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
                 if (!s.isBlank() || !s.isEmpty()) {
+                    model?.updateStat("con", Integer.valueOf(s.toString()))
                     var newMod: Int = ((Integer.valueOf(s.toString())) / 2) - 5
                     if (newMod > 0){
                         conMod?.setText("+" + newMod.toString())
@@ -174,6 +192,7 @@ class stats : Fragment(){
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!s.isBlank() || !s.isEmpty()) {
+                    model?.updateStat("int", Integer.valueOf(s.toString()))
                     var newMod: Int = ((Integer.valueOf(s.toString())) / 2) - 5
                     if (newMod > 0){
                         intMod?.setText("+" + newMod.toString())
@@ -194,6 +213,7 @@ class stats : Fragment(){
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!s.isBlank() || !s.isEmpty()) {
+                    model?.updateStat("wis", Integer.valueOf(s.toString()))
                     var newMod: Int = ((Integer.valueOf(s.toString())) / 2) - 5
                     if (newMod > 0){
                         wisMod?.setText("+" + newMod.toString())
@@ -214,6 +234,7 @@ class stats : Fragment(){
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!s.isBlank() || !s.isEmpty()) {
+                    model?.updateStat("cha", Integer.valueOf(s.toString()))
                     var newMod: Int = ((Integer.valueOf(s.toString())) / 2) - 5
                     if (newMod > 0){
                         chaMod?.setText("+" + newMod.toString())
