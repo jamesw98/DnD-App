@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "431722084317",
+    "firebase_url": "https://dnd-app-9282f.firebaseio.com",
+    "project_id": "dnd-app-9282f",
+    "storage_bucket": "dnd-app-9282f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:431722084317:android:4ad98f6eacc10a73526834",
+        "android_client_info": {
+          "package_name": "com.example.dndapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "431722084317-7o1c0uk6thgj57lep5t9m9mrb35fvvbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJA0tE0d1-I9otu0xr_6137CHMDZdeXBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "431722084317-7o1c0uk6thgj57lep5t9m9mrb35fvvbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

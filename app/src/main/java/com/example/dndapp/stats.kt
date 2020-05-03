@@ -25,7 +25,6 @@ class stats : Fragment(){
         val view = inflater.inflate(R.layout.fragment_stats, container, false)
 
         val model = activity?.run{ ViewModelProviders.of(this).get(PlayerModel::class.java)}?: throw Exception("Invalid Activity")
-        // TODO on every edittext update, call model.updateStats() or similar fun for level, name, hp, maxhp
 
         val strText: EditText? = view?.findViewById(R.id.strScore)
         val dexText: EditText? = view?.findViewById(R.id.dexScore)

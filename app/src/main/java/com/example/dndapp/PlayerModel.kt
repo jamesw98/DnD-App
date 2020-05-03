@@ -7,6 +7,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import okhttp3.*
+import org.json.JSONObject
+import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
 class PlayerModel : ViewModel(){
@@ -41,6 +44,38 @@ class PlayerModel : ViewModel(){
 
         // updates the livedata character
         liveDataCharacter.postValue(localCharacter)
+    }
+
+    fun callAPI(query: String?, queryType: Char): JSONObject?{
+        val client = OkHttpClient()
+
+        var baseURL: String
+        var json: JSONObject? = null
+
+        if (queryType == 's'){
+            baseURL = "https://api.open5e.com/spells/"
+        }
+        else {
+            baseURL = "https://api.open5e.com/magicitems/"
+        }
+
+        val request = Request.Builder()
+            .url(baseURL + query)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.d("FAILED", "API CALL FAILED")
+            }
+            override fun onResponse(call: Call, response: Response) {
+                json = JSONObject(response.body()?.string())
+            }
+        })
+
+        while(json == null){
+            Thread.sleep(10)
+        }
+        return json
     }
 
     fun updateName(name: String){

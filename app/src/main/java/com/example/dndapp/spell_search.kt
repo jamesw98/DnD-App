@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -23,6 +24,8 @@ class spell_search() : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_spell_search, container, false)
 
+        val model = activity?.run{ ViewModelProviders.of(this).get(PlayerModel::class.java)}?: throw Exception("Invalid Activity")
+
         val name: TextView? = view?.findViewById(R.id.nameText)
         val desc: TextView? = view?.findViewById(R.id.descriptionText)
         val level: TextView? = view?.findViewById(R.id.levelText)
@@ -36,17 +39,8 @@ class spell_search() : Fragment() {
         var json: JSONObject? = null
 
         searchButton?.setOnClickListener{
-            val request = Request.Builder()
-                .url("https://api.open5e.com/spells/" + stringToSearch)
-                .build()
+            json = model.callAPI(stringToSearch, 'i')
 
-            client.newCall(request).enqueue(object : Callback{
-                override fun onFailure(call: Call, e: IOException) {
-                }
-                override fun onResponse(call: Call, response: Response) {
-                    json = JSONObject(response.body()?.string())
-                }
-            })
             try {
                 name?.setText(json?.get("name")?.toString())
 
