@@ -3,6 +3,7 @@ package com.example.dndapp
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -26,6 +27,8 @@ class PlayerModel : ViewModel(){
     private lateinit var viewModelJob: Job
     private lateinit var ioScope: CoroutineScope
 
+    val database = FirebaseDatabase.getInstance()
+
     init {
         viewModelJob = Job()
         ioScope = CoroutineScope(Dispatchers.IO + viewModelJob)
@@ -43,6 +46,36 @@ class PlayerModel : ViewModel(){
         }
 
         // updates the livedata character
+        liveDataCharacter.postValue(localCharacter)
+    }
+
+    fun saveCharacterToFireBase(){
+        val charRef = database.getReference("characters").child(localCharacter.name)
+        charRef.setValue(localCharacter)
+    }
+
+    fun updatePlayerName(name: String){
+        localCharacter.name = name
+        liveDataCharacter.postValue(localCharacter)
+    }
+
+    fun updatePlayerAC(ac: Int){
+        localCharacter.ac = ac
+        liveDataCharacter.postValue(localCharacter)
+    }
+
+    fun updatePlayerMaxHP(max: Int){
+        localCharacter.maxHP = max
+        liveDataCharacter.postValue(localCharacter)
+    }
+
+    fun updatePlayerHP(hp: Int){
+        localCharacter.currentHP = hp
+        liveDataCharacter.postValue(localCharacter)
+    }
+
+    fun updatePlayerLevel(level: Int){
+        localCharacter.level = level
         liveDataCharacter.postValue(localCharacter)
     }
 
@@ -76,9 +109,6 @@ class PlayerModel : ViewModel(){
             Thread.sleep(10)
         }
         return json
-    }
-
-    fun updateName(name: String){
     }
 
     fun getCharacter(): MutableLiveData<Character>{

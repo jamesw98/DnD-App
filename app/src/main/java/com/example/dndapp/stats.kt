@@ -3,17 +3,13 @@ package com.example.dndapp
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 
@@ -46,12 +42,10 @@ class stats : Fragment(){
         val wisMod: TextView? = view?.findViewById(R.id.wisModText)
         val chaMod: TextView? = view?.findViewById(R.id.chaModText2)
 
-        val rollButton: Button? = view?.findViewById(R.id.booton)
+        val saveButton: Button? = view?.findViewById(R.id.savePlayer)
 
-        rollButton?.setOnClickListener{
-            model?.getCharacter()?.observe(viewLifecycleOwner, androidx.lifecycle.Observer { character ->
-                Log.d("LiveStrength", character.strength.toString())
-            })
+        saveButton?.setOnClickListener{
+            model.saveCharacterToFireBase()
         }
 
 
@@ -68,7 +62,7 @@ class stats : Fragment(){
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!s.isBlank() || !s.isEmpty()) {
-                    // TODO update viewmodel
+                    model.updatePlayerName(s.toString())
                 }
             }
         })
@@ -82,7 +76,7 @@ class stats : Fragment(){
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!s.isBlank() || !s.isEmpty()) {
-                    // TODO update viewmodel
+                    model.updatePlayerLevel(Integer.valueOf(s.toString()))
                 }
             }
         })
@@ -96,7 +90,7 @@ class stats : Fragment(){
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!s.isBlank() || !s.isEmpty()) {
-                    // TODO update viewmodel
+                    model.updatePlayerMaxHP(Integer.valueOf(s.toString()))
                 }
             }
         })
@@ -110,7 +104,7 @@ class stats : Fragment(){
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (!s.isBlank() || !s.isEmpty()) {
-                    // TODO update viewmodel
+                    model.updatePlayerHP(Integer.valueOf(s.toString()))
                 }
             }
         })

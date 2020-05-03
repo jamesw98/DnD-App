@@ -11,6 +11,8 @@
 
     <string name="search">Search</string>
 
+    <string name="save">Save Player</string>
+
     <string name="diceTitle">Dice Roller</string>
     <string name="dieType">Die Type</string>
 

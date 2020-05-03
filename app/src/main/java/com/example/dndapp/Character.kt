@@ -1,13 +1,15 @@
 package com.example.dndapp
 
+
 class Character() {
 
     var name: String = ""
-    var items: String = ""
 
     var ac: Int = 0
     var maxHP: Int = 0
     var currentHP: Int = 0
+
+    var level: Int = 0
 
     var strength: Int = 0
     var dexterity: Int = 0
@@ -35,10 +37,8 @@ class Character() {
     var stealth: Int = 0
     var survi: Int = 0
 
-    var proficiency = emptyArray<Int>()
-    var expertise = emptyArray<Int>()
-
-    //TODO handle level n' shit in these setters
+    var proficiency = emptyList<Int>()
+    var expertise = emptyList<Int>()
 
     fun setStr(value: Int){
         strength = value
