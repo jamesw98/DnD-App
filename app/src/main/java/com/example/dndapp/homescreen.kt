@@ -1,6 +1,9 @@
 package com.example.dndapp
 
+import android.content.BroadcastReceiver
+import android.content.IntentFilter
 import android.content.res.Configuration
+import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,11 +16,13 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dndapp.R
 
 class homescreen : Fragment() {
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +37,11 @@ class homescreen : Fragment() {
         val spellButton: Button? = view?.findViewById(R.id.spell)
         val itemButton: Button? = view?.findViewById(R.id.item)
         val loadButton: Button? = view?.findViewById(R.id.loadCharacter)
+
+        //Broadcast Receiver stuff
+        val filter = IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION)
+        val receiver = NetworkChecker()
+        LocalBroadcastManager.getInstance(activity!!.applicationContext).registerReceiver(receiver as NetworkChecker, filter)
 
         // go to dice roller
         diceButton?.setOnClickListener() {
