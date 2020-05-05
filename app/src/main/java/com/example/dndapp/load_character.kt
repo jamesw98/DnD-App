@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class load_character : Fragment() {
     override fun onCreateView(
@@ -26,7 +27,19 @@ class load_character : Fragment() {
         val recyclerView: RecyclerView? = view?.findViewById(R.id.charaterRV)
         recyclerView?.layoutManager = LinearLayoutManager(activity?.applicationContext)
 
+        var fab: FloatingActionButton? = view?.findViewById(R.id.fab)
+
         var adapter = CharacterListAdapter()
+
+        fab?.setOnClickListener(){
+            model.callAPICharacters()
+
+            model?.liveDataAdapter.observe(viewLifecycleOwner, androidx.lifecycle.Observer {characters ->
+                for (i in characters){
+                    adapter.addCharacter(i)
+                }
+            })
+        }
 
         model.callAPICharacters()
 
