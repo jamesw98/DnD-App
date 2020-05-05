@@ -48,6 +48,21 @@ class stats : Fragment(){
             model.saveCharacterToFireBase()
         }
 
+        if(this.arguments?.get("name") != null){
+            strText?.setText(this.arguments?.get("str").toString())
+            dexText?.setText(this.arguments?.get("dex").toString())
+            conText?.setText(this.arguments?.get("con").toString())
+            intText?.setText(this.arguments?.get("int").toString())
+            wisText?.setText(this.arguments?.get("wis").toString())
+            chaText?.setText(this.arguments?.get("cha").toString())
+
+            acText?.setText(this.arguments?.get("ac").toString())
+            levelText?.setText(this.arguments?.get("level").toString())
+            nameText?.setText(this.arguments?.get("name").toString())
+
+            hpText?.setText(this.arguments?.get("hp").toString())
+            maxHPText?.setText(this.arguments?.get("maxHP").toString())
+        }
 
         (view.findViewById(R.id.gotoSkills) as Button).setOnClickListener {
             it.findNavController().navigate(R.id.action_stats_to_skills)
@@ -256,4 +271,5 @@ class stats : Fragment(){
         return view
     }
 }
+
 

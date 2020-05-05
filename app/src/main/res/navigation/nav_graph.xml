@@ -59,5 +59,9 @@
         android:id="@+id/load_character"
         android:name="com.example.dndapp.load_character"
         android:label="fragment_load_character"
-        tools:layout="@layout/fragment_load_character" />
+        tools:layout="@layout/fragment_load_character" >
+        <action
+            android:id="@+id/action_load_character_to_stats"
+            app:destination="@id/stats" />
+    </fragment>
 </navigation>

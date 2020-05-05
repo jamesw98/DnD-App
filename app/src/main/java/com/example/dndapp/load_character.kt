@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -55,7 +57,6 @@ class load_character : Fragment() {
 
         fun addCharacter(newChar: Character){
             this.characters.add(newChar)
-            Log.d("Characters >>", this.characters.toString())
             notifyDataSetChanged()
         }
 
@@ -76,7 +77,22 @@ class load_character : Fragment() {
             holder.view.findViewById<TextView>(R.id.ac).text = "Armor Class: " + characters.get(position).ac.toString()
 
             holder.itemView.setOnClickListener(){
+                var currentChar = characters.get(position)
+                var bundle = Bundle()
 
+                view?.findNavController()?.navigate(R.id.action_load_character_to_stats, bundleOf(
+                    "str" to currentChar.strength,
+                    "dex" to currentChar.dexterity,
+                    "con" to currentChar.constitution,
+                    "int" to currentChar.intelligence,
+                    "wis" to currentChar.wisdom,
+                    "cha" to currentChar.charisma,
+                    "ac" to currentChar.ac,
+                    "level" to currentChar.level,
+                    "name" to currentChar.name,
+                    "maxHP" to currentChar.maxHP,
+                    "hp" to currentChar.currentHP
+                ))
             }
         }
 
