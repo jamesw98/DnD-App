@@ -1,5 +1,6 @@
 package com.example.dndapp
 
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -91,8 +92,6 @@ class load_character : Fragment() {
 
             holder.itemView.setOnClickListener(){
                 var currentChar = characters.get(position)
-
-                Log.d(">>>test", currentChar.maxHP.toString())
 
                 view?.findNavController()?.navigate(R.id.action_load_character_to_stats, bundleOf(
                     "str" to currentChar.strength,

@@ -2,7 +2,10 @@ package com.example.dndapp
 
 import android.content.BroadcastReceiver
 import android.content.IntentFilter
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +26,13 @@ import com.example.dndapp.R
 
 class homescreen : Fragment() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        var receiver = NetworkChecker()
+        activity?.registerReceiver(receiver, filter)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +49,9 @@ class homescreen : Fragment() {
         val loadButton: Button? = view?.findViewById(R.id.loadCharacter)
 
         //Broadcast Receiver stuff
-        val filter = IntentFilter(WifiManager.NETWORK_STATE_CHANGED_ACTION)
+        val filter = IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION)
         val receiver = NetworkChecker()
-        LocalBroadcastManager.getInstance(activity!!.applicationContext).registerReceiver(receiver as NetworkChecker, filter)
+        LocalBroadcastManager.getInstance(activity!!.applicationContext).registerReceiver(receiver, filter)
 
         // go to dice roller
         diceButton?.setOnClickListener() {

@@ -49,12 +49,20 @@
         android:id="@+id/spell_search"
         android:name="com.example.dndapp.spell_search"
         android:label="fragment_spell_search"
-        tools:layout="@layout/fragment_spell_search" />
+        tools:layout="@layout/fragment_spell_search" >
+        <action
+            android:id="@+id/action_spell_search_to_description"
+            app:destination="@id/description" />
+    </fragment>
     <fragment
         android:id="@+id/item_search"
         android:name="com.example.dndapp.item_search"
         android:label="fragment_item_search"
-        tools:layout="@layout/fragment_item_search" />
+        tools:layout="@layout/fragment_item_search" >
+        <action
+            android:id="@+id/action_item_search_to_description"
+            app:destination="@id/description" />
+    </fragment>
     <fragment
         android:id="@+id/load_character"
         android:name="com.example.dndapp.load_character"
@@ -64,4 +72,9 @@
             android:id="@+id/action_load_character_to_stats"
             app:destination="@id/stats" />
     </fragment>
+    <fragment
+        android:id="@+id/description"
+        android:name="com.example.dndapp.description"
+        android:label="fragment_description"
+        tools:layout="@layout/fragment_description" />
 </navigation>
