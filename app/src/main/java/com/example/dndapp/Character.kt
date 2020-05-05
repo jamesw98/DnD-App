@@ -69,7 +69,7 @@ class Character() {
     }
 
     fun setWis(value: Int){
-        intelligence = value
+        wisdom = value
         var mod = (wisdom/2) - 5
         animal = mod
         insi = mod

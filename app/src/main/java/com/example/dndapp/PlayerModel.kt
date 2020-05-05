@@ -52,6 +52,10 @@ class PlayerModel : ViewModel(){
         liveDataAdapter.value = dataAdapter
     }
 
+    fun getCharacter(): Character{
+        return localCharacter
+    }
+
     fun updateStat(stat: String, value: Int){
         when(stat.toLowerCase()) {
             "str" -> localCharacter.setStr(value)
@@ -97,8 +101,6 @@ class PlayerModel : ViewModel(){
     }
 
     fun callAPICharacters(){
-        var tempArray: MutableList<Character> = mutableListOf()
-
         val characterRef = database.getReference("characters")
         val ref = database.getReference("characters").child("REFRESHERCHAR")
         ref.setValue(UUID.randomUUID().toString())
@@ -125,6 +127,8 @@ class PlayerModel : ViewModel(){
                         var tempCha: Long = tempHash.getValue("charisma") as Long
                         var ac: Long = tempHash.getValue("ac") as Long
                         var level: Long = tempHash.getValue("level") as Long
+                        var currHP: Long = tempHash.getValue("currentHP") as Long
+                        var maxHP: Long = tempHash.getValue("maxHP") as Long
 
                         var name: String = tempHash.getValue("name") as String
 
@@ -138,6 +142,8 @@ class PlayerModel : ViewModel(){
                         tempChar.name = name
                         tempChar.ac = Integer.valueOf(ac.toString())
                         tempChar.level = Integer.valueOf(level.toString())
+                        tempChar.currentHP = Integer.valueOf(currHP.toString())
+                        tempChar.maxHP = Integer.valueOf(maxHP.toString())
 
                         dataAdapter.add(tempChar)
                     }

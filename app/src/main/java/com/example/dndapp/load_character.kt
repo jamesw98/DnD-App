@@ -91,7 +91,8 @@ class load_character : Fragment() {
 
             holder.itemView.setOnClickListener(){
                 var currentChar = characters.get(position)
-                var bundle = Bundle()
+
+                Log.d(">>>test", currentChar.maxHP.toString())
 
                 view?.findNavController()?.navigate(R.id.action_load_character_to_stats, bundleOf(
                     "str" to currentChar.strength,

@@ -1,5 +1,6 @@
 package com.example.dndapp
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,6 +15,10 @@ import org.w3c.dom.Text
 import kotlin.random.Random
 
 class dice_roller : Fragment() {
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
