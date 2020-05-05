@@ -1,9 +1,20 @@
 package com.example.dndapp
 
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -11,6 +22,8 @@ import kotlinx.coroutines.launch
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.coroutines.CoroutineContext
 
 class PlayerModel : ViewModel(){
@@ -20,6 +33,9 @@ class PlayerModel : ViewModel(){
         get() = parentJob+ Dispatchers.Main
 
     private val scope = CoroutineScope(coroutineContext)
+
+    val liveDataAdapter = MutableLiveData<ArrayList<Character>>()
+    private var dataAdapter = ArrayList<Character>()
 
     val liveDataCharacter = MutableLiveData<Character>()
     private val localCharacter = Character()
@@ -33,6 +49,7 @@ class PlayerModel : ViewModel(){
         viewModelJob = Job()
         ioScope = CoroutineScope(Dispatchers.IO + viewModelJob)
         liveDataCharacter.value = localCharacter
+        liveDataAdapter.value = dataAdapter
     }
 
     fun updateStat(stat: String, value: Int){
@@ -79,6 +96,58 @@ class PlayerModel : ViewModel(){
         liveDataCharacter.postValue(localCharacter)
     }
 
+    fun callAPICharacters(){
+        var tempArray: MutableList<Character> = mutableListOf()
+
+        val characterRef = database.getReference("characters")
+        val ref = database.getReference("characters").child("REFRESHERCHAR")
+        ref.setValue(UUID.randomUUID().toString())
+
+        val listener = object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                // intentionally blank
+            }
+
+            override fun onDataChange(data: DataSnapshot) {
+                dataAdapter.clear()
+
+                for (i in data.children){
+
+                    if (!i.key.equals("REFRESHERCHAR")){
+                        var tempHash = i.value as HashMap<*, *>
+
+                        tempHash = tempHash as HashMap<String, *>
+                        var tempStr: Long = tempHash.getValue("strength") as Long
+                        var tempDex: Long = tempHash.getValue("dexterity") as Long
+                        var tempCon: Long = tempHash.getValue("constitution") as Long
+                        var tempInt: Long = tempHash.getValue("intelligence") as Long
+                        var tempWis: Long = tempHash.getValue("wisdom") as Long
+                        var tempCha: Long = tempHash.getValue("charisma") as Long
+                        var ac: Long = tempHash.getValue("ac") as Long
+                        var level: Long = tempHash.getValue("level") as Long
+
+                        var name: String = tempHash.getValue("name") as String
+
+                        var tempChar = Character()
+                        tempChar.setStr(Integer.valueOf(tempStr.toString()))
+                        tempChar.setDex(Integer.valueOf(tempDex.toString()))
+                        tempChar.setCon(Integer.valueOf(tempCon.toString()))
+                        tempChar.setInt(Integer.valueOf(tempInt.toString()))
+                        tempChar.setWis(Integer.valueOf(tempWis.toString()))
+                        tempChar.setCha(Integer.valueOf(tempCha.toString()))
+                        tempChar.name = name
+                        tempChar.ac = Integer.valueOf(ac.toString())
+                        tempChar.level = Integer.valueOf(level.toString())
+
+                        dataAdapter.add(tempChar)
+                    }
+                }
+            }
+        }
+        characterRef.addValueEventListener(listener)
+    }
+
+
     fun callAPI(query: String?, queryType: Char): JSONObject?{
         val client = OkHttpClient()
 
@@ -109,9 +178,5 @@ class PlayerModel : ViewModel(){
             Thread.sleep(10)
         }
         return json
-    }
-
-    fun getCharacter(): MutableLiveData<Character>{
-        return liveDataCharacter
     }
 }

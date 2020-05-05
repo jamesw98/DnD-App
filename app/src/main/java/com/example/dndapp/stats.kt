@@ -53,6 +53,20 @@ class stats : Fragment(){
             it.findNavController().navigate(R.id.action_stats_to_skills)
         }
 
+        acText?.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if (!s.isBlank() || !s.isEmpty()) {
+                    model.updatePlayerAC(Integer.valueOf(s.toString()))
+                }
+            }
+        })
+
         nameText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
 

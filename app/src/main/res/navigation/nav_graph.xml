@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_homescreen_to_item_search"
             app:destination="@id/item_search" />
+        <action
+            android:id="@+id/action_homescreen_to_load_character"
+            app:destination="@id/load_character" />
     </fragment>
     <fragment
         android:id="@+id/skills"
@@ -52,4 +55,9 @@
         android:name="com.example.dndapp.item_search"
         android:label="fragment_item_search"
         tools:layout="@layout/fragment_item_search" />
+    <fragment
+        android:id="@+id/load_character"
+        android:name="com.example.dndapp.load_character"
+        android:label="fragment_load_character"
+        tools:layout="@layout/fragment_load_character" />
 </navigation>
