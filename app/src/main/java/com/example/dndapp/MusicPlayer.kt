@@ -18,9 +18,7 @@ class MusicPlayer(val musicService: MusicService): MediaPlayer.OnCompletionListe
     // duration of music in seconds
     val MUSICDURATION = arrayOf(600, 600, 600, 600, 600, 600)
 
-
-
-    lateinit var player: MediaPlayer
+    var player: MediaPlayer = create1(musicService.applicationContext, MUSICPATH[0])
     var currentPosition = 0
     var musicIndex = 0
     private var musicStatus = 0 //0: before starts 1: playing 2: paused
@@ -32,8 +30,6 @@ class MusicPlayer(val musicService: MusicService): MediaPlayer.OnCompletionListe
     fun getMusicName(): String {
         return MUSICNAME[musicIndex]
     }
-
-
 
     // gets the index for a certain song name
     private fun getSongIndex(name: String?) : Int{

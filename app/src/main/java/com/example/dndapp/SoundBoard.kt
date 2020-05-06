@@ -82,7 +82,7 @@ class SoundBoard : Fragment() {
 
     private val musicServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(componentName: ComponentName, iBinder: IBinder) {
-
+            Log.d(">>Test", "service connection")
             val binder = iBinder as MusicService.MyBinder
             musicService = binder.getService()
             isBound = true
@@ -136,8 +136,8 @@ class SoundBoard : Fragment() {
         }
 
         play?.setOnClickListener{
-
             if (isBound) {
+                Log.d(">>test", "music should be playing")
                 when (musicService?.getPlayingStatus()) {
                     0 -> {
                         musicService?.startMusic(musicSelection)

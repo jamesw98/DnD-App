@@ -15,7 +15,7 @@ class NetworkChecker : BroadcastReceiver(){
         val networkInfo: NetworkInfo? = conn.activeNetworkInfo
 
         if (networkInfo?.type != ConnectivityManager.TYPE_WIFI){
-            var toast = Toast.makeText(context, "Internet connection lost", Toast.LENGTH_LONG)
+            var toast = Toast.makeText(context, "Internet connection lost. Searching, Saving, and Loading Characters will not work", Toast.LENGTH_LONG)
             toast.show()
         }
     }
