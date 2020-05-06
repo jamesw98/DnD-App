@@ -31,6 +31,16 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Button
+        android:id="@+id/sound"
+        android:layout_width="700px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/soundboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadCharacter" />
+
+    <Button
         android:id="@+id/stats"
         android:layout_width="700px"
         android:layout_height="wrap_content"

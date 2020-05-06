@@ -1,28 +1,17 @@
 package com.example.dndapp
 
-import android.content.BroadcastReceiver
 import android.content.IntentFilter
-import android.content.Context
-import android.content.Intent
-import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dndapp.R
 
 class homescreen : Fragment() {
 
@@ -47,11 +36,17 @@ class homescreen : Fragment() {
         val spellButton: Button? = view?.findViewById(R.id.spell)
         val itemButton: Button? = view?.findViewById(R.id.item)
         val loadButton: Button? = view?.findViewById(R.id.loadCharacter)
+        val soundButton: Button? = view?.findViewById(R.id.sound)
 
         //Broadcast Receiver stuff
         val filter = IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION)
         val receiver = NetworkChecker()
         LocalBroadcastManager.getInstance(activity!!.applicationContext).registerReceiver(receiver, filter)
+
+        // go to sound board
+        soundButton?.setOnClickListener() {
+            view?.findNavController()?.navigate(R.id.action_homescreen_to_soundBoard)
+        }
 
         // go to dice roller
         diceButton?.setOnClickListener() {

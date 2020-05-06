@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_homescreen_to_load_character"
             app:destination="@id/load_character" />
+        <action
+            android:id="@+id/action_homescreen_to_soundBoard"
+            app:destination="@id/soundBoard" />
     </fragment>
     <fragment
         android:id="@+id/skills"
@@ -77,4 +80,8 @@
         android:name="com.example.dndapp.description"
         android:label="fragment_description"
         tools:layout="@layout/fragment_description" />
+    <fragment
+        android:id="@+id/soundBoard"
+        android:name="com.example.dndapp.SoundBoard"
+        android:label="SoundBoard" />
 </navigation>

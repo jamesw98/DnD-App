@@ -53,4 +53,20 @@
     <string name="sleight">Int</string>
     <string name="stealth">Wis</string>
     <string name="survival">Wis</string>
+
+    <string name="track">Current Track:</string>
+    <string name="play">Play</string>
+    <string name="soundboard">Sound Board</string>
+
+    <string-array name="backgroundMusicList">
+        <item>Dungeon</item>
+        <item>Battle</item>
+        <item>Goblin Cave</item>
+        <item>Nice Village</item>
+        <item>Spooky Village</item>
+        <item>Tavern</item>
+    </string-array>
+
+
+
 </resources>
