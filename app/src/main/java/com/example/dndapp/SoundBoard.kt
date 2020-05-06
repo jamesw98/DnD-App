@@ -36,6 +36,9 @@ class SoundBoard : Fragment() {
 
     var musicSelection: String? = null
 
+    var trackPlaying: Boolean? = null
+
+
 
     var musicService: MusicService? = null
     var startMusicServiceIntent: Intent? = null
@@ -107,6 +110,7 @@ class SoundBoard : Fragment() {
         val backgroundMusicSpinner: Spinner? = view?.findViewById(R.id.backgroundMusic)
         val play: Button? = view?.findViewById(R.id.playButton)
 
+
         ArrayAdapter.createFromResource(
             activity!!.applicationContext,
             R.array.backgroundMusicList,
@@ -117,7 +121,7 @@ class SoundBoard : Fragment() {
             // Apply the adapter to the spinner
             backgroundMusicSpinner?.adapter = adapter
         }
-
+        trackPlaying = false
 
         backgroundMusicSpinner?.setSelection(0)
         musicSelection = backgroundMusicSpinner?.adapter?.getItem(0).toString().toLowerCase()
@@ -129,6 +133,7 @@ class SoundBoard : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 musicSelection = parent?.getItemAtPosition(position).toString().toLowerCase()
                 musicService?.pauseMusic()
+
                 musicService?.startMusic(musicSelection)
                 musicService?.pauseMusic()
                 play?.setText("Play")
@@ -142,6 +147,7 @@ class SoundBoard : Fragment() {
                     0 -> {
                         musicService?.startMusic(musicSelection)
                         play?.setText("Pause")
+                        trackPlaying = true
                     }
                     1 -> {
                         musicService?.pauseMusic()
@@ -150,6 +156,7 @@ class SoundBoard : Fragment() {
                     2 -> {
                         musicService?.resumeMusic()
                         play?.setText("Pause")
+                        trackPlaying = true
                     }
                 }
             }
