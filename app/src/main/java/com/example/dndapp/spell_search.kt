@@ -8,8 +8,10 @@ import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -38,8 +40,15 @@ class spell_search() : Fragment() {
 
         var json: JSONObject? = null
 
+        desc?.setOnClickListener{
+            if (json != null){
+                var description: String = json?.get("desc").toString()
+                view?.findNavController()?.navigate(R.id.action_spell_search_to_description, bundleOf("text" to description))
+            }
+        }
+
         searchButton?.setOnClickListener{
-            json = model.callAPI(stringToSearch, 'i')
+            json = model.callAPI(stringToSearch, 's')
 
             try {
                 name?.setText(json?.get("name")?.toString())
