@@ -128,6 +128,10 @@ class SoundBoard : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 musicSelection = parent?.getItemAtPosition(position).toString().toLowerCase()
+                musicService?.pauseMusic()
+                musicService?.startMusic(musicSelection)
+                musicService?.pauseMusic()
+                play?.setText("Play")
             }
         }
 
@@ -141,7 +145,7 @@ class SoundBoard : Fragment() {
                     }
                     1 -> {
                         musicService?.pauseMusic()
-                        play?.setText("Resume")
+                        play?.setText("Play")
                     }
                     2 -> {
                         musicService?.resumeMusic()
